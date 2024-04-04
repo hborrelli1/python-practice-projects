@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import random
+
 print("""
 ========================================================================
  Guessing Game
@@ -17,9 +19,11 @@ Let's begin!
 ========================================================================
 """)
 
-secretNumber = 5
-guess = input('> ')
-guessCount = 1
+guess = int(input('> '))
+guess_count = 1
+start_range = 0
+end_range = 100
+secret_number = random.randint(start_range, end_range)
 
 
 def printWinningStatment(count):
@@ -32,9 +36,20 @@ Well Done!
 """ % (count)
   return text
 
-while guess != secretNumber:
-  guessCount += 1
-  print('Nope.. Try again.')
-  guess = input('> ')
+while guess != secret_number:
+  if guess_count == 10:
+    print('Game Over. You did not guess the correct number in 10 turns or less.')
+    break
+
+  guess_count += 1
+  print('\nNope... Try again.')
+
+  if guess > secret_number:
+    print('Lower...\n')
+  else:
+    print('Higher...\n')
+
+  guess = int(input('> '))
+
 else:
-  print(printWinningStatment(guessCount))
+  print(printWinningStatment(guess_count))
