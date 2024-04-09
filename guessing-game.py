@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import random
 
@@ -20,11 +20,11 @@ def main():
   ========================================================================
   """)
 
-  guess = int(input('> '))
-  guess_count = 1
-  start_range = 0
-  end_range = 100
-  secret_number = random.randint(start_range, end_range)
+  guess: int = get_integer_input('> ')
+  guess_count: int = 1
+  start_range: int = 0
+  end_range: int = 100
+  secret_number: int = random.randint(start_range, end_range)
   
   while guess != secret_number:
     if guess_count == 10:
@@ -39,14 +39,21 @@ def main():
     else:
       print('Higher...\n')
     
-    guess = int(input('> '))
-    
+    guess: int = get_integer_input('> ')
+
   else:
-    print(printWinningStatment(guess_count))
+    print(print_winning_statment(guess_count))
 
+def get_integer_input(prompt: str) -> int:
+  """Get integer input from user."""
+  while True:
+    try:
+      value = int(input(prompt))
+      return value
+    except ValueError:
+      print('Invalid Input. Please enter an integer.')
 
-
-def printWinningStatment(count):
+def print_winning_statment(count: int) -> str:
   text = """
 You won!
 
@@ -56,4 +63,5 @@ Well Done!
 """ % (count)
   return text
 
-main()
+if __name__ == '__main__':
+  main()
